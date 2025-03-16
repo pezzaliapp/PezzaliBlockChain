@@ -11,8 +11,19 @@
 </head>
 <body>
     <h1>PezzaliBlockChain</h1>
+    
     <h2>Prezzo attuale di Bitcoin</h2>
     <h3 id="btc-price">Caricamento...</h3>
+    
+    <label for="currency">Seleziona valuta:</label>
+    <select id="currency" onchange="aggiornaPrezzo()">
+        <option value="usd">USD ($)</option>
+        <option value="eur">EUR (€)</option>
+        <option value="gbp">GBP (£)</option>
+        <option value="jpy">JPY (¥)</option>
+        <option value="chf">CHF (Franco Svizzero)</option>
+    </select>
+    
     <button onclick="aggiornaPrezzo()">Aggiorna Prezzo</button>
     
     <h2>Andamento Bitcoin (Ultimi 7 Giorni)</h2>
