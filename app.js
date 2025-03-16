@@ -25,34 +25,46 @@ async function caricaGrafico() {
     try {
         let response = await fetch("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=7");
         let data = await response.json();
-        let prezzi = data.prices.map(p => ({ x: new Date(p[0]), y: p[1] }));
+        
+        if (!data.prices || data.prices.length === 0) {
+            console.error("Nessun dato ricevuto per il grafico.");
+            return;
+        }
+
+        let labels = data.prices.map(p => new Date(p[0]).toLocaleDateString());
+        let prezzi = data.prices.map(p => p[1]);
 
         let ctx = document.getElementById("btcChart").getContext("2d");
-        if (window.myChart) window.myChart.destroy(); // Rimuove eventuali grafici precedenti
+        if (window.myChart) {
+            window.myChart.destroy(); // Rimuove eventuali grafici precedenti
+        }
+
         window.myChart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: prezzi.map(p => p.x.toLocaleDateString()),
+                labels: labels,
                 datasets: [{
                     label: "Prezzo Bitcoin (Ultimi 7 Giorni)",
-                    data: prezzi.map(p => p.y),
+                    data: prezzi,
                     borderColor: "orange",
                     borderWidth: 2,
                     fill: false
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
-                    x: { type: "category" },
-                    y: { beginAtZero: false }
+                    x: { title: { display: true, text: "Data" } },
+                    y: { title: { display: true, text: "Prezzo in USD" } }
                 }
             }
         });
+
     } catch (error) {
         console.error("Errore nel caricamento del grafico:", error);
     }
 }
-
 window.onload = () => {
     aggiornaPrezzo();
     caricaGrafico();
