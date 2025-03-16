@@ -24,7 +24,18 @@ button:hover {
     background-color: #ffcc00;
 }
 
+/* Contenitore del grafico per il layout responsivo */
+.chart-container {
+    position: relative;
+    width: 90%;         /* Usa il 90% della larghezza disponibile */
+    max-width: 600px;   /* Limita la larghezza massima a 600px */
+    margin: 0 auto;     /* Centra il contenitore orizzontalmente */
+    min-height: 300px;  /* Altezza minima per garantire visibilità del grafico */
+}
+
+/* Il canvas si adatta automaticamente alla larghezza del contenitore */
 canvas {
     max-width: 100%;
     background-color: white;
+    height: auto;       /* Adatta l'altezza in base all'ampiezza */
 }
