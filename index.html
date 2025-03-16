@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PezzaliBlockChain - Bitcoin Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>PezzaliBlockChain</h1>
+    <h2>Prezzo attuale di Bitcoin</h2>
+    <h3 id="btc-price">Caricamento...</h3>
+    <button onclick="aggiornaPrezzo()">Aggiorna Prezzo</button>
+    
+    <h2>Andamento Bitcoin (Ultimi 7 Giorni)</h2>
+    <canvas id="btcChart" width="400" height="200"></canvas>
+
+    <h2>Ricevi Bitcoin</h2>
+    <img id="btc-qr" src="" alt="QR Code Bitcoin">
+    
+    <script src="app.js"></script>
+</body>
+</html>
