@@ -1,5 +1,4 @@
-// Se bitcoinjs-lib è stato caricato da <script>, lo troviamo in window.bitcoinjs
-// (verifica nel tuo browser console log se si chiama "bitcoinjs" o "bitcoin" a seconda della versione)
+// Se bitcoinjs-lib è caricato da <script>, lo troviamo in window.bitcoinjs
 const bitcoin = window.bitcoinjs || null;
 
 async function aggiornaPrezzo() {
@@ -39,7 +38,6 @@ async function caricaGrafico() {
       return;
     }
 
-    // Estraggo date e prezzi
     const labels = data.prices.map((p) =>
       new Date(p[0]).toLocaleDateString()
     );
@@ -47,12 +45,11 @@ async function caricaGrafico() {
 
     const ctx = document.getElementById("btcChart").getContext("2d");
 
-    // Se esiste già un grafico, lo distruggo per evitare conflitti
+    // Se esiste già un grafico creato, lo distruggiamo prima di crearne uno nuovo
     if (window.myChart) {
       window.myChart.destroy();
     }
 
-    // Creo il nuovo grafico
     window.myChart = new Chart(ctx, {
       type: "line",
       data: {
@@ -61,15 +58,19 @@ async function caricaGrafico() {
           {
             label: "Prezzo Bitcoin (Ultimi 7 Giorni)",
             data: prezzi,
-            borderColor: "orange", // Puoi cambiare o rimuovere se preferisci
+            borderColor: "orange", // colore linea
             borderWidth: 2,
             fill: false
           }
         ]
       },
       options: {
+        // Queste opzioni rendono il grafico responsive
         responsive: true,
-        maintainAspectRatio: false,
+        // Se vuoi mantenere il rapporto di aspetto tipico (16:9), metti true
+        // Se vuoi adattarlo liberamente all’altezza del contenitore, metti false
+        maintainAspectRatio: false, 
+
         scales: {
           x: {
             title: {
@@ -91,7 +92,7 @@ async function caricaGrafico() {
   }
 }
 
-// All'avvio della pagina, aggiorno il prezzo e carico il grafico
+// All’avvio della pagina, aggiorno il prezzo e carico il grafico
 window.onload = () => {
   aggiornaPrezzo();
   caricaGrafico();
