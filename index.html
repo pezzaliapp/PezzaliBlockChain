@@ -8,13 +8,13 @@
   />
   <title>PezzaliBlockChain - Bitcoin Tracker</title>
   <link rel="stylesheet" href="style.css" />
-  
+
   <!-- Manifest per PWA -->
   <link rel="manifest" href="manifest.json" />
   
   <!-- Carico Chart.js prima di app.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Carico la libreria bitcoinjs-lib -->
+  <!-- Libreria Bitcoin -->
   <script src="https://cdn.jsdelivr.net/npm/bitcoinjs-lib@5.2.0"></script>
 </head>
 <body>
@@ -35,12 +35,11 @@
   <button onclick="aggiornaPrezzo()">Aggiorna Prezzo</button>
 
   <h2>Andamento Bitcoin (Ultimi 7 Giorni)</h2>
-  <!-- Canvas per il grafico -->
-  <canvas
-    id="btcChart"
-    width="400"
-    height="200"
-  ></canvas>
+  <!-- Contenitore con max-width e margin auto -->
+  <div class="chart-container">
+    <!-- NESSUN width/height in canvas -->
+    <canvas id="btcChart"></canvas>
+  </div>
 
   <h2>Ricevi Bitcoin</h2>
   <p>
