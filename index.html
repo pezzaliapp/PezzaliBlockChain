@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PezzaliBlockChain - Bitcoin Tracker</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bitcoinjs-lib@5.2.0"></script>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>PezzaliBlockChain - Bitcoin Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Manifest per PWA -->
+  <link rel="manifest" href="manifest.json" />
+  
+  <!-- Carico Chart.js prima di app.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Carico la libreria bitcoinjs-lib -->
+  <script src="https://cdn.jsdelivr.net/npm/bitcoinjs-lib@5.2.0"></script>
 </head>
 <body>
-    <h1>PezzaliBlockChain</h1>
-    
-    <h2>Prezzo attuale di Bitcoin</h2>
-    <h3 id="btc-price">Caricamento...</h3>
-    
-    <label for="currency">Seleziona valuta:</label>
-    <select id="currency" onchange="aggiornaPrezzo()">
-        <option value="usd">USD ($)</option>
-        <option value="eur">EUR (€)</option>
-        <option value="gbp">GBP (£)</option>
-        <option value="jpy">JPY (¥)</option>
-        <option value="chf">CHF (Franco Svizzero)</option>
-    </select>
-    
-    <button onclick="aggiornaPrezzo()">Aggiorna Prezzo</button>
-    
-    <h2>Andamento Bitcoin (Ultimi 7 Giorni)</h2>
-    <canvas id="btcChart" width="400" height="200"></canvas>
+  <h1>PezzaliBlockChain</h1>
 
-    <h2>Ricevi Bitcoin</h2>
-    <p><strong>Indirizzo Bitcoin:</strong> <span id="btc-address">bc1qjjsszhdv26ttqpawd0mcm86lg5uatvvfqn4pre</span></p>
-    <img id="btc-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:bc1qjjsszhdv26ttqpawd0mcm86lg5uatvvfqn4pre" alt="QR Code Bitcoin">
-    
-    <script src="app.js"></script>
+  <h2>Prezzo attuale di Bitcoin</h2>
+  <h3 id="btc-price">Caricamento...</h3>
+
+  <label for="currency">Seleziona valuta:</label>
+  <select id="currency" onchange="aggiornaPrezzo()">
+    <option value="usd">USD ($)</option>
+    <option value="eur">EUR (€)</option>
+    <option value="gbp">GBP (£)</option>
+    <option value="jpy">JPY (¥)</option>
+    <option value="chf">CHF (Franco Svizzero)</option>
+  </select>
+
+  <button onclick="aggiornaPrezzo()">Aggiorna Prezzo</button>
+
+  <h2>Andamento Bitcoin (Ultimi 7 Giorni)</h2>
+  <!-- Canvas per il grafico -->
+  <canvas
+    id="btcChart"
+    width="400"
+    height="200"
+  ></canvas>
+
+  <h2>Ricevi Bitcoin</h2>
+  <p>
+    <strong>Indirizzo Bitcoin:</strong>
+    <span id="btc-address">bc1qjjsszhdv26ttqpawd0mcm86lg5uatvvfqn4pre</span>
+  </p>
+  <img
+    id="btc-qr"
+    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:bc1qjjsszhdv26ttqpawd0mcm86lg5uatvvfqn4pre"
+    alt="QR Code Bitcoin"
+  />
+
+  <!-- Script dell'applicazione -->
+  <script src="app.js"></script>
 </body>
 </html>
