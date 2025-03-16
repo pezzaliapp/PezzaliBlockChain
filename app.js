@@ -28,12 +28,14 @@ async function caricaGrafico() {
         let prezzi = data.prices.map(p => ({ x: new Date(p[0]), y: p[1] }));
 
         let ctx = document.getElementById("btcChart").getContext("2d");
-        new Chart(ctx, {
+        if (window.myChart) window.myChart.destroy(); // Rimuove eventuali grafici precedenti
+        window.myChart = new Chart(ctx, {
             type: "line",
             data: {
+                labels: prezzi.map(p => p.x.toLocaleDateString()),
                 datasets: [{
                     label: "Prezzo Bitcoin (Ultimi 7 Giorni)",
-                    data: prezzi,
+                    data: prezzi.map(p => p.y),
                     borderColor: "orange",
                     borderWidth: 2,
                     fill: false
@@ -41,7 +43,7 @@ async function caricaGrafico() {
             },
             options: {
                 scales: {
-                    x: { type: "time", time: { unit: "day" } },
+                    x: { type: "category" },
                     y: { beginAtZero: false }
                 }
             }
