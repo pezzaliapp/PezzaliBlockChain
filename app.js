@@ -3,9 +3,19 @@ const bitcoin = window.bitcoinjs ? window.bitcoinjs : require('https://cdn.jsdel
 
 async function aggiornaPrezzo() {
     try {
-        let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+        let currency = document.getElementById("currency").value;
+        let response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`);
         let data = await response.json();
-        document.getElementById("btc-price").innerText = data.bitcoin.usd + " USD";
+        
+        let symbol = {
+            "usd": "$",
+            "eur": "€",
+            "gbp": "£",
+            "jpy": "¥",
+            "chf": "CHF"
+        };
+
+        document.getElementById("btc-price").innerText = data.bitcoin[currency] + " " + symbol[currency];
     } catch (error) {
         document.getElementById("btc-price").innerText = "Errore nel caricamento!";
     }
