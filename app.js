@@ -1,3 +1,6 @@
+// Importa BitcoinJS (solo per browser moderni)
+const bitcoin = window.bitcoinjs ? window.bitcoinjs : require('https://cdn.jsdelivr.net/npm/bitcoinjs-lib@5.2.0');
+
 async function aggiornaPrezzo() {
     try {
         let response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
@@ -38,7 +41,21 @@ async function caricaGrafico() {
     }
 }
 
+// Funzione per generare un indirizzo Bitcoin
+function generaWalletBitcoin() {
+    const keyPair = bitcoin.ECPair.makeRandom();
+    const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey });
+    
+    // Mostra l’indirizzo generato
+    document.getElementById("btc-address").innerText = address;
+
+    // Genera il QR Code per il nuovo indirizzo
+    document.getElementById("btc-qr").src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:${address}`;
+}
+
+// Esegui le funzioni al caricamento della PWA
 window.onload = () => {
     aggiornaPrezzo();
     caricaGrafico();
+    generaWalletBitcoin();
 };
